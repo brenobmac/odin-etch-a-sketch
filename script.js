@@ -23,7 +23,7 @@ function generateGrid(rows, cols) {
     }
 }
 
-let grid = document.getElementById("main-container"); // Select screen
+let grid = document.getElementById("screen"); // Select screen
 let isDrawing = false;
 
 // Event listeners for clicking an drawing

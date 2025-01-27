@@ -6,16 +6,102 @@ body {
 }
 
 #main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 75vh;
+}
+
+#device {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 650px;
     min-width: 650px;
+    padding: 25px;
+    padding-top: 50px;
     border: 2px solid transparent;
     border-color: black;
+    background-color: rgba(255, 0, 0, 0.596);
+    border-radius: 12px;
+    gap: 10px;
     /*below is a way to center the square*/
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#screen {
+    height: 550px;
+    width: 550px;
+    border: 2px solid transparent;
+    border-color: black;
+    background-color: white;
     display: grid;
+}
+
+#button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    contain: layout paint; /* Isolates the rendering. This is done because when I clicked it the other
+    CSS elements moved around a bit around the page during the animation.*/
+}
+
+/* Hide the default checkbox and ensure it doesn't affect layout. Same reason as the one above. */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute; /* Ensure it doesn’t occupy layout space */
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 12px;
+    backface-visibility: hidden; /* To prevent other elements from moving around when I click the button. */
+}
+
+/* Little square inside the switch */
+.slider:before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+/* Slide animation */
+input:checked + .slider {
+    background-color: rgba(255, 0, 0, 0.692);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+input:focus + .slider {
+    outline: none;
 }
 
 .grid-square {
