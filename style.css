@@ -19,6 +19,11 @@ body {
 }
 
 .grid-square {
-    border: 1px solid black;
-    box-sizing: border-box;
+    border: 1px solid grey;
+    box-sizing: border-box; /* Ensures padding and border are included in element dimensions. Useful for hover. */
+    cursor: pointer; /*Adds pointer when hover*/
+}
+
+.grid-square:hover {
+    border: 2px solid black;
 }
