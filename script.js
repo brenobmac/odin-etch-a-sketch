@@ -27,7 +27,8 @@ let grid = document.getElementById("screen"); // Select screen
 let isDrawing = false;
 let brushMode = true; // Default to brush mode (true = paint, false = erase)
 
-const brushEraserToggle = document.getElementById("brush-eraser");
+let brushEraserToggle = document.getElementById("brush-eraser");
+let gridToggle = document.getElementById("grid-on-off");
 
 // Update mode when the switch state changes.
 // The input event fires when the value of an <input>,
@@ -53,5 +54,20 @@ grid.addEventListener("mousemove", (e) => {
     }
 });
 
+// Toggle grid
+gridToggle.addEventListener("input", (e) => {
+    const gridSquares = document.querySelectorAll(".grid-square"); // select all grid squares
+    if (e.target.checked) {
+        // Grid off
+        gridSquares.forEach((square) => {
+            square.style.border = "none";
+        });
+    } else {
+        // Grid on
+        gridSquares.forEach((square) => {
+            square.style.border = "1px solid grey";
+        });
+    }
+});
 // Generate a 16x16 grid
 generateGrid(16, 16);
