@@ -25,12 +25,23 @@ function generateGrid(rows, cols) {
 
 let grid = document.getElementById("screen"); // Select screen
 let isDrawing = false;
+let brushMode = true; // Default to brush mode (true = paint, false = erase)
+
+const brushEraserToggle = document.getElementById("brush-eraser");
+
+// Update mode when the switch state changes.
+// The input event fires when the value of an <input>,
+// <select>, or <textarea> element has been changed as a direct result of a user action
+// (such as typing in a textbox or checking a checkbox) => Developer mozilla def.
+brushEraserToggle.addEventListener("input", (e) => {
+    brushMode = !e.target.checked; // Brush mode = unchecked (not false), Eraser mode = checked (not true)
+});
 
 // Event listeners for clicking an drawing
 // Remember that e.target = grid, which is main-container.
 grid.addEventListener("click", (e) => {
     if (e.target.classList.contains("grid-square")) {
-        e.target.style.backgroundColor = "black"; // Change color
+        e.target.style.backgroundColor = brushMode ? "black" : "white";
     }
 });
 grid.addEventListener("mousedown", () => (isDrawing = true));
@@ -38,7 +49,7 @@ grid.addEventListener("mouseup", () => (isDrawing = false));
 grid.addEventListener("mousemove", (e) => {
     if (isDrawing && e.target.classList.contains("grid-square")) {
         //Keeps checking if the buttons is pressed and also hovering button.
-        e.target.style.backgroundColor = "black"; // Change color while dragging
+        e.target.style.backgroundColor = brushMode ? "black" : "white"; // Change color while dragging -> True black / false white.
     }
 });
 
