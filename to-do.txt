@@ -1,0 +1,3 @@
+Fix little borders when painting with grid off.
+Add a slider or something to change grid size.
+Fix CSS as always.

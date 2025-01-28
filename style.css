@@ -1,8 +1,8 @@
 body {
     margin: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
 #main-container {
@@ -27,7 +27,7 @@ body {
     gap: 20px;
     /*below is a way to center the square*/
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
@@ -173,4 +173,21 @@ The border of the pseudo-element is initially set to transparent, but it becomes
 #reset-button:active {
     transform: translateY(2px); /* Slightly moves the button downward */
     box-shadow: 0px 0px 0px; /* Removes shadow on press for depth effect */
+}
+
+.footer {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.596);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Fixed height for footer */
+    position: fixed; /* Fixes the footer at the bottom */
+    width: 100%; /* Stretches it across the page */
+    bottom: 0; /* Places it at the bottom */
+    padding: 0; /* Removes unnecessary padding */
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.3); /* Optional: Add shadow for depth */
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
