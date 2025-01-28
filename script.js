@@ -23,12 +23,17 @@ function generateGrid(rows, cols) {
     }
 }
 
+// Variables
 let grid = document.getElementById("screen"); // Select screen
 let isDrawing = false;
 let brushMode = true; // Default to brush mode (true = paint, false = erase)
 
 let brushEraserToggle = document.getElementById("brush-eraser");
 let gridToggle = document.getElementById("grid-on-off");
+
+let resetButton = document.getElementById("reset-button");
+
+//Event listeners:
 
 // Update mode when the switch state changes.
 // The input event fires when the value of an <input>,
@@ -56,18 +61,27 @@ grid.addEventListener("mousemove", (e) => {
 
 // Toggle grid
 gridToggle.addEventListener("input", (e) => {
-    const gridSquares = document.querySelectorAll(".grid-square"); // select all grid squares
+    let gridSquares = document.querySelectorAll(".grid-square"); // select all grid squares
     if (e.target.checked) {
         // Grid off
         gridSquares.forEach((square) => {
-            square.style.border = "none";
+            square.style.borderColor = "transparent"; // Make the border transparent
         });
     } else {
         // Grid on
         gridSquares.forEach((square) => {
-            square.style.border = "1px solid grey";
+            square.style.borderColor = "grey"; // Restore the border color
         });
     }
 });
-// Generate a 16x16 grid
-generateGrid(16, 16);
+
+// Reset button
+resetButton.addEventListener("click", () => {
+    let gridSquares = document.querySelectorAll(".grid-square");
+    gridSquares.forEach((square) => {
+        square.style.backgroundColor = "white";
+    });
+});
+
+// Generate grid
+generateGrid(32, 32);

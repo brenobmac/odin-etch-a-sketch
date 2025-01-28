@@ -24,12 +24,13 @@ body {
     border-color: black;
     background-color: rgba(255, 0, 0, 0.596);
     border-radius: 12px;
-    gap: 10px;
+    gap: 20px;
     /*below is a way to center the square*/
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #screen {
@@ -41,18 +42,19 @@ body {
     display: grid;
 }
 
-#left-container {
+#left-container,
+#right-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 #button-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    width: 550px; /*Same as screen*/
     color: white;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -106,6 +108,7 @@ body {
     border-radius: 8px;
     background-color: white;
     transition: 0.4s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Slide animation */
@@ -122,11 +125,52 @@ input:focus + .slider {
 }
 
 .grid-square {
+    position: relative; /* required for pseudo-element positioning*/
     border: 1px solid grey;
     box-sizing: border-box; /* Ensures padding and border are included in element dimensions. Useful for hover. */
     cursor: pointer; /*Adds pointer when hover*/
 }
 
-.grid-square:hover {
-    border: 2px solid black;
+/*The ::after pseudo-element is used to create a separate layer for the hover effect.
+This ensures that the hover effect (border: 2px solid black) is always visible, even when the grid border is transparent.*/
+/*In CSS, ::after creates a pseudo-element that is the last child of the selected element. 
+It is often used to add cosmetic content to an element with the content property. It is inline by default. (developer mozilla)*/
+/*Basically, we are creating a new element that is responsible for the hover effect*/
+/*The .grid-square::after pseudo-element is used to create a separate layer for the hover effect.
+The border of the pseudo-element is initially set to transparent, but it becomes visible on hover (border-color: black).*/
+/* The grid effect is now handled by the pseudo element, so it remains unchanged when we toggle the border off.*/
+
+.grid-square::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent; /* Default transparent border */
+    box-sizing: border-box;
+}
+
+.grid-square:hover::after {
+    border-color: black; /* Hover effect */
+}
+
+#reset-button {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.692);
+    font-size: 22px;
+}
+
+#reset-button:active {
+    transform: translateY(2px); /* Slightly moves the button downward */
+    box-shadow: 0px 0px 0px; /* Removes shadow on press for depth effect */
 }
